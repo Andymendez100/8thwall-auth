@@ -20,6 +20,7 @@ app.get('/', (req, res) => {
 const authorizedURL = [
   'https://www.8thwall.com/v2x/js-battery-breakdown/files/app.js',
   'https://tonyqnguyen-tony-v2x.dev.8thwall.app/js-battery-breakdown/',
+  'https://www.8thwall.com/'
 ];
 
 app.post('/verifyAR', (req, res) => {
