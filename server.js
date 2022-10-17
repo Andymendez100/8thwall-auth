@@ -6,7 +6,12 @@ const cors = require('cors');
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
-app.use(cors());
+app.use(
+  cors({
+    origin: 'https://8thwall.tonytnguyen.dev',
+    credentials: true,
+  })
+);
 
 app.get('/', (req, res) => {
   res.send('success');
