@@ -28,13 +28,20 @@ app.post('/verifyAR', (req, res) => {
   console.log('referrer', referrer, authorizedURL.includes(referrer));
   if (authorizedURL.includes(referrer)) {
     console.log('req.headers.authorization', req.headers.authorization);
-    if (!req.headers.authorization) {
+    if (
+      !req.headers.authorization &&
+      req.headers.authorization.split(' ')[0] === 'Bearer'
+    ) {
       return res.status(403).json({ error: 'No credentials sent!' });
     }
-    jwt.verify(req.headers.authorization, 'shhhhh', function (err, decoded) {
-      if (err) return res.status(403).json({ error: 'Invalid JWT!' });
-      res.status(200).json({ error: false });
-    });
+    jwt.verify(
+      req.headers.authorization.split(' ')[1],
+      'shhhhh',
+      function (err, decoded) {
+        if (err) return res.status(403).json({ error: 'Invalid JWT!' });
+        res.status(200).json({ error: false });
+      }
+    );
   } else {
     console.log('deny');
     res.status(403).send({ error: 'who r u' });
