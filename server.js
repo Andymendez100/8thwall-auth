@@ -20,17 +20,24 @@ app.get('/', (req, res) => {
 const authorizedURL = [
   'https://www.8thwall.com/v2x/js-battery-breakdown/files/app.js',
   'https://tonyqnguyen-tony-v2x.dev.8thwall.app/js-battery-breakdown/',
-  'https://www.8thwall.com/'
+  'https://www.8thwall.com/',
 ];
 
 app.post('/verifyAR', (req, res) => {
   const { referrer } = req.body;
   console.log('referrer', referrer, authorizedURL.includes(referrer));
   if (authorizedURL.includes(referrer)) {
-    res.status(200).send('Allow Access');
+    console.log('req.headers.authorization', req.headers.authorization);
+    if (!req.headers.authorization) {
+      return res.status(403).json({ error: 'No credentials sent!' });
+    }
+    jwt.verify(req.headers.authorization, 'shhhhh', function (err, decoded) {
+      if (err) return res.status(403).json({ error: 'Invalid JWT!' });
+      res.status(200).json({ error: false });
+    });
   } else {
     console.log('deny');
-    res.status(403).send('Deny Access');
+    res.status(403).send({ error: 'who r u' });
   }
 });
 app.post('/tony', (req, res) => {
