@@ -1,8 +1,8 @@
 const express = require('express');
-
+const cors = require('cors');
+const jwt = require('jsonwebtoken');
 const app = express();
 const PORT = process.env.PORT || 8080;
-const cors = require('cors');
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
@@ -33,9 +33,12 @@ app.post('/verifyAR', (req, res) => {
   }
 });
 app.post('/tony', (req, res) => {
-  res.cookie('test', JSON.stringify({ user: 'tony' }), {
-    // domain: '.balboadigital.com',
-    // maxAge: 7 * 24 * 60 * 60 * 1000,
+  const token = jwt.sign({ user: 'tony' }, 'shhhhh');
+
+  res.cookie('test', token, {
+    domain: '.tonytnguyen.dev',
+    sameSite: true,
+    secure: true,
   });
   res.send('Congrats Tony');
 });
