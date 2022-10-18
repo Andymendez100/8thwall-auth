@@ -8,7 +8,7 @@ const PORT = process.env.PORT || 8080;
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 // app.use(helmet({ crossOriginResourcePolicy: { policy: "same-site" } }));
-app.use(helmet.contentSecurityPolicy());
+// app.use(helmet.contentSecurityPolicy());
 // app.use(helmet.crossOriginEmbedderPolicy());
 // app.use(helmet.crossOriginOpenerPolicy());
 // app.use(helmet.crossOriginResourcePolicy());
