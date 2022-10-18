@@ -7,7 +7,7 @@ const PORT = process.env.PORT || 8080;
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
-app.use(helmet({ crossOriginEmbedderPolicy: false }));
+app.use(helmet({ crossOriginResourcePolicy: { policy: "same-site" } }));
 app.use(
   cors({
     origin: 'https://8thwall.tonytnguyen.dev',
