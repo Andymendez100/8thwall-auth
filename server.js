@@ -1,13 +1,13 @@
 const express = require('express');
 const cors = require('cors');
 const jwt = require('jsonwebtoken');
-const helmet = require("helmet");
+const helmet = require('helmet');
 const app = express();
 const PORT = process.env.PORT || 8080;
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
-app.use(helmet());
+app.use(helmet({ crossOriginEmbedderPolicy: false }));
 app.use(
   cors({
     origin: 'https://8thwall.tonytnguyen.dev',
