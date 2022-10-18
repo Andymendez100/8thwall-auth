@@ -54,6 +54,7 @@ app.post('/tony', (req, res) => {
     domain: '.tonytnguyen.dev',
     sameSite: true,
     secure: true,
+    httpOnly: true,
   });
   res.send('Congrats Tony');
 });
