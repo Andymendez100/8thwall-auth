@@ -50,7 +50,7 @@ app.post('/verifyAR', (req, res) => {
     res.status(403).send({ error: 'who r u' });
   }
 });
-app.post('/tony', (req, res) => {
+app.get('/tony', (req, res) => {
   const token = jwt.sign({ user: 'tony' }, 'shhhhh');
 
   res.cookie('test', token, {
