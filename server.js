@@ -1,6 +1,7 @@
 const express = require('express');
 const cors = require('cors');
 const jwt = require('jsonwebtoken');
+const helmet = require("helmet");
 const app = express();
 const PORT = process.env.PORT || 8080;
 
@@ -12,6 +13,7 @@ app.use(
     credentials: true,
   })
 );
+app.use(helmet());
 
 app.get('/', (req, res) => {
   res.send('success');
@@ -21,6 +23,7 @@ const authorizedURL = [
   'https://www.8thwall.com/v2x/js-battery-breakdown/files/app.js',
   'https://tonyqnguyen-tony-v2x.dev.8thwall.app/js-battery-breakdown/',
   'https://www.8thwall.com/',
+  'https://www.centerlearning.com/HomePage/Portal.asp',
 ];
 
 app.post('/verifyAR', (req, res) => {
